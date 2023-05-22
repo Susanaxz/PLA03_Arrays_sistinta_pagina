@@ -2,11 +2,20 @@
     session_start();
 
     //recuperar las personas del array
+    $personas = $_SESSION['personas'];
 
 	//inicializar el array
+    $errores = array();
+    $personas = array();
 
     //compactaremos en un array el array vacio de personas
-    
-    //Trasladar el contenido del array $personas a la variable de sesión
+    $_SESSION['personas'] = $personas;
 
-    //Retornar a la página principal
+
+if (isset($_SESSION['personas'][$_POST['baja']])) {
+    // Si es así, lo borramos
+    unset($_SESSION['personas'][$_POST['baja']]);
+}
+
+// Redireccionamos al usuario de vuelta a la página principal
+header('Location: ../PLA03_Ejercicio_array_personas.php');

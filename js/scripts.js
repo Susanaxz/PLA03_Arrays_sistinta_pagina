@@ -17,4 +17,15 @@ function modificarPersonas() {
 	
 }
 
-// PRUEBA GIT
+
+
+function borrarPersona(nif) {
+  // Pregunta al usuario
+  let respuesta = confirm("¿Estás seguro de que quieres borrar esta persona?");
+
+  // Si el usuario acepta, borrar la persona
+  if (respuesta) {
+    document.querySelector("#baja_input").value = nif;
+    document.querySelector("#formularioBaja").submit();
+  }
+}
