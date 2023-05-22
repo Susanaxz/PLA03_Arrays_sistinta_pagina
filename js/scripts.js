@@ -29,17 +29,9 @@ function modificarPersonas() {
       document.getElementById("formularioModi").submit();
     });
   });
-	//situarnos en la etiqueta tr que corresponda a la fila donde se encuentra el botón
 
-	//recuperar los datos de la persona
-	
-	//trasladar los datos al formulario oculto
-
-	//submit del formulario
 	
 }
-
-
 
 function borrarPersona(nif) {
   // Pregunta al usuario
@@ -48,6 +40,20 @@ function borrarPersona(nif) {
   // Si el usuario acepta, borrar la persona
   if (respuesta) {
     document.querySelector("#baja").value = nif;
+    document.querySelector("#formularioBaja").submit();
+  }
+}
+
+
+function bajaTodasLasPersonas() {
+  // Pregunta al usuario
+  let respuesta = confirm(
+    "¿Estás seguro de que quieres borrar todas las personas?"
+  );
+
+  // Si el usuario acepta, borrar todas las personas
+  if (respuesta) {
+    document.querySelector("#bajaTodas").value = true;
     document.querySelector("#formularioBaja").submit();
   }
 }

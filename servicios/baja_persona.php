@@ -1,25 +1,28 @@
 <?php 
     session_start();
 
+    require_once 'funciones/validardatos.php';
+
     //recuperar las personas del array
-
-    //recuperar el nif
-
-    try {
-        //validar nif informado
-
-        //validar que el nif existe en el array
-
-        //borrar la fila del array
-
-        //mensaje de baja efectuada
-    } catch (Exception $e) {
-       
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nif = $_POST['nifBaja'];
     }
 
-     //compactaremos en un array las variables php que se muestran en el documento HTML y que correspondan a la operativa de alta
-    
-     //Trasladar el contenido del array $personas a la variable de sesión
- 
-     //Retornar a la página principal
-		
+    try {
+        if (isset($_SESSION["personas"][$nif])) {
+            // El NIF existe en el array, procede a borrarlo
+            unset($_SESSION["personas"][$nif]);
+            // Establece una variable de sesión para indicar que se realizó la baja correctamente
+            $_SESSION["baja"] = true;
+        } else {
+            // Si el NIF no existe en el array, muestra un mensaje de error
+            $_SESSION["errores"][] = "El NIF no existe en el array de personas.";
+        }
+    } catch (Exception $e) {
+        $_SESSION["errores"][] = $e->getMessage();
+    }
+
+
+
+    // Retornar a la página principal
+    header("Location: ../PLA03_Ejercicio_array_personas.php");

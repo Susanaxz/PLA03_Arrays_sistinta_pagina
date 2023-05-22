@@ -108,9 +108,10 @@ if (isset($_SESSION['personas'])) {
 						<td><input type='text' value='<?php echo $persona["nombre"]; ?>' id='nombre-<?php echo $persona["nif"]; ?>' class='nombre'></td>
 						<td><input type='text' value='<?php echo $persona["direccion"]; ?>' id='direccion-<?php echo $persona["nif"]; ?>' class='direccion'></td>
 						<td>
-							<form method='post' action='#'>
-								<input type='hidden' name='nifBaja' value="<?php echo isset($_SESSION['form_data']['nif']) ? $_SESSION['form_data']['nif'] : ''; ?>">
-								<button type="submit" class="btn btn-warning" name='bajaPersona'>Baja</button>
+							<form method='post' action='servicios/baja_persona.php'>
+								<input type='hidden' name='nifBaja' value="<?php echo $persona["nif"]; ?>">
+								<button type="submit" class="btn btn-warning" onclick="borrarPersona('<?php echo $persona["nif"]; ?>')">Baja</button>
+
 							</form>
 							<button type="button" class="btn btn-primary modiPersona" id='<?php echo $persona["nif"]; ?>'>Modificar</button>
 						</td>
@@ -121,23 +122,11 @@ if (isset($_SESSION['personas'])) {
 				endforeach;
 			endif;
 			?>
-			<!--tr>
-		      <td>40000000A</td>
-		      <td><input type='text' value='O-Ren Ishii' class='nombre'></td>
-		      <td><input type='text' value='Graveyard avenue, 66' class='direccion'></td>
-		      <td>
-		      	<form method='post' action='#'>
-		      		<input type='hidden' name='nifBaja' value='40000000A'>
-		      		<button type="submit" class="btn btn-warning" name='bajaPersona'>Baja</button>
-		      	</form>
-		      	<button type="button" class="btn btn-primary" name='modiPersona'>Modificar</button>
-		      </td>
-		    </tr-->
 		</table>
 
 		<form method='post' action='servicios/baja_personas.php' id='formularioBaja'>
 			<input type='hidden' id='baja' name='baja'></input>
-			<button type="submit" class="btn btn-danger" id='baja' name='baja'>Baja personas</button>
+			<button type="submit" class="btn btn-danger" id='baja' name='baja' onclick="bajaTodasLasPersonas()">Baja personas</button>
 		</form>
 
 		<!--FORMULARIO OCULTO PARA LA MODIFICACION-->
