@@ -76,9 +76,17 @@ if (isset($_SESSION['personas'])) {
 					$_SESSION["alta"] = false;
 				}
 
+				if (isset($_SESSION["baja"]) && $_SESSION["baja"]) {
+					echo "<div id = 'exito'>  <p>Persona dada de baja correctamente</p> </div>";
+					$_SESSION["baja"] = false;
+				}
+
+				if (isset($_SESSION["modificacion"]) && $_SESSION["modificacion"]) {
+					echo "<div id = 'exito'>  <p>Persona modificada correctamente</p> </div>";
+					$_SESSION["modificacion"] = false;
+				}
+
 				?>
-
-
 
 			</span>
 		</form><br>
@@ -97,14 +105,14 @@ if (isset($_SESSION['personas'])) {
 			?>
 					<tr>
 						<td> <?php echo $persona["nif"]; ?> </td>
-						<td><input type='text' value='<?php echo $persona["nombre"]; ?>' class='nombre'></td>
-						<td><input type='text' value='<?php echo $persona["direccion"]; ?>' class='direccion'></td>
+						<td><input type='text' value='<?php echo $persona["nombre"]; ?>' id='nombre-<?php echo $persona["nif"]; ?>' class='nombre'></td>
+						<td><input type='text' value='<?php echo $persona["direccion"]; ?>' id='direccion-<?php echo $persona["nif"]; ?>' class='direccion'></td>
 						<td>
 							<form method='post' action='#'>
 								<input type='hidden' name='nifBaja' value="<?php echo isset($_SESSION['form_data']['nif']) ? $_SESSION['form_data']['nif'] : ''; ?>">
 								<button type="submit" class="btn btn-warning" name='bajaPersona'>Baja</button>
 							</form>
-							<button type="button" class="btn btn-primary" name='modiPersona'>Modificar</button>
+							<button type="button" class="btn btn-primary modiPersona" id='<?php echo $persona["nif"]; ?>'>Modificar</button>
 						</td>
 						</td>
 
